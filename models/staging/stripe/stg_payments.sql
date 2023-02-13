@@ -5,7 +5,7 @@ with
             user_id as customer_id,
             paymentmethod as payment_method,
             status,
-            amount / 100 as amount,
+            {{ cents_to_dollars('amount',4) }} as amount,
             created as created_as
         from {{ source("stripe", "payment") }}
     )
